@@ -1,0 +1,7 @@
+pip-tools           # get pip-compile
+requests            # do http
+beautifulsoup4      # navigate through web pages
+html5lib            # parse web pages
+toml                # parse configuration files
+pytz                # time zone information
+sqlalchemy          # orm

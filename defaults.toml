@@ -1,0 +1,16 @@
+[notify]
+save_scrapes=false
+
+[notify.db]
+uri = "sqlite:///notify.sqlite3"
+
+[notify.tags]
+filter=false
+exclude=[]
+include=[]
+
+[notify.tz]
+filter=false
+home="UTC"
+shift_early=0
+shift_late=0

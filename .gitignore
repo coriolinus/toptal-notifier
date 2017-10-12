@@ -1,0 +1,6 @@
+venv
+/scrapes/
+__pycache__
+*.pyc
+config.toml
+*.sqlite3
