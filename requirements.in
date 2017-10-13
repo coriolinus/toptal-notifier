@@ -1,5 +1,5 @@
 pip-tools           # get pip-compile
 toml                # parse configuration files
-pytz                # time zone information
+pendulum            # richer datetime with timestamp parsing
 sqlalchemy          # orm
 selenium            # browser driver
