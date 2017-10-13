@@ -4,3 +4,4 @@ __pycache__
 *.pyc
 config.toml
 *.sqlite3
+ghostdriver.log
