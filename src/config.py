@@ -9,7 +9,5 @@ with open(DEFAULTS_FILENAME, 'r') as defaults_file:
 with open(FILENAME, 'r') as config_file:
     config.update(toml.loads(config_file.read()))
 
+selenium = config['selenium']
 config = config['notify']
-
-# if 'email' not in config.keys():
-#     raise BadConfiguration("[notify.email] table not found in config.toml")

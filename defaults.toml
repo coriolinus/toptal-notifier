@@ -1,5 +1,5 @@
 [notify]
-save_scrapes=false
+debug_output=false
 
 [notify.db]
 uri = "sqlite:///notify.sqlite3"

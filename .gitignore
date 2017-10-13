@@ -1,5 +1,6 @@
 venv
 /scrapes/
+/screens/
 __pycache__
 *.pyc
 config.toml

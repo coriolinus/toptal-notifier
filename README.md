@@ -11,10 +11,15 @@ This notifier is intended to be run periodically via cron or similar. On each ru
 
 Configuration is accomplished via the file `config.toml` in the project root. If this file is not present, or any configuration value is missing, the values in `defaults.toml` are used instead.
 
-All values reside within the `notify` table. Current configuration parameters:
+`[notify]` configures general parameters for the program.
 
 - `email_address: str` your email address. This is where notifications will be sent.
-- `save_scrapes: bool` if `True`, save all scraped content into the `scrapes/` subdirectory. This is most useful for debugging. Default: `False`.
+- `debug_output: bool` if `True`, emit debugging screenshots and html. Default: `False`
+
+`[notify.auth]` configures your toptal authentication
+
+- `username: str` your toptal username
+- `password: str` your toptal password
 
 `[notify.db]` configures the database used. The database is managed via SqlAlchemy. The `uri` parameter is passed to the [sqlalchemy.create_engine](http://docs.sqlalchemy.org/en/rel_1_1/core/engines.html#sqlalchemy.create_engine) function as the first argument. Any other parameters in this table are passed as keyword arguments.
 
@@ -40,3 +45,12 @@ The default work period is assumed to be from 8am to 5pm for both the coder and 
 - `home: str` your home time zone. This must be a value present in `pytz.all_timezones`. Default: `"UTC"`
 - `shift_early: int` the number of hours you're willing to shift your schedule earlier to increase overlap with the client. This is most useful for accepting clients east of your location. Default: `0`
 - `shift_late: int` the number of hours you're willing to shift your schedule later to increase overlap with the client. This is most useful for accepting clients west of your location. Default: `0`
+
+### Selenium Configuration
+
+This project depends on Selenium and [Chrome](https://www.google.com/chrome/browser/desktop/index.html). In the future things may get more user-friendly, but for now, you need to specify the precise locations of both your chrome executable and the selenium [chromedriver](https://sites.google.com/a/chromium.org/chromedriver/downloads). Do so with the following table in `config.toml`:
+
+`[selenium]`
+
+- `chrome: str` absolute path to chrome executable
+- `driver: str` absolute path to chromedriver executable
