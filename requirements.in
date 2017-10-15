@@ -1,5 +1,4 @@
 pip-tools           # get pip-compile
 toml                # parse configuration files
 pendulum            # richer datetime with timestamp parsing
-sqlalchemy          # orm
 selenium            # browser driver

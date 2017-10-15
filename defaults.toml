@@ -1,8 +1,8 @@
 [notify]
 debug_output=false
 
-[notify.db]
-uri = "sqlite:///notify.sqlite3"
+[notify.persist]
+path="persist.toml"
 
 [notify.tags]
 filter=false

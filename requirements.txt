@@ -13,6 +13,5 @@ pytz==2017.2              # via tzlocal
 pytzdata==2017.2.2        # via pendulum
 selenium==3.6.0
 six==1.11.0               # via pip-tools, python-dateutil
-sqlalchemy==1.1.14
 toml==0.9.3.1
 tzlocal==1.4              # via pendulum

@@ -21,9 +21,9 @@ Configuration is accomplished via the file `config.toml` in the project root. If
 - `username: str` your toptal username
 - `password: str` your toptal password
 
-`[notify.db]` configures the database used. The database is managed via SqlAlchemy. The `uri` parameter is passed to the [sqlalchemy.create_engine](http://docs.sqlalchemy.org/en/rel_1_1/core/engines.html#sqlalchemy.create_engine) function as the first argument. Any other parameters in this table are passed as keyword arguments.
+`[notify.persist]` configures file persistence.
 
-- `uri: str` the with which to connect to your database. Default: `"sqlite:///notify.sqlite3"` See [here](http://docs.sqlalchemy.org/en/rel_1_1/core/engines.html#database-urls) for examples for other databases
+- `path: str` where to put the persistence file. Default: `"persist.toml"`
 
 `[notify.email]` configures the protocol with which the program sends mail to you. This is assumed to be an SMTP server capable of TLS.
 
