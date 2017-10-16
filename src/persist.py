@@ -1,6 +1,9 @@
 "Handle data persistence for the notifier"
 
+import pendulum
 import toml
+from contextlib import contextmanager
+from datetime import datetime
 from .config import config
 
 
@@ -29,3 +32,34 @@ def persist(data_dict):
     """
     with open(config['persist']['path'], 'w') as persistfile:
         return persistfile.write(toml.dumps(data_dict))
+
+
+@contextmanager
+def persisted():
+    """
+    Context manager for persistent data.
+
+    Use like:
+
+    ```python
+    from .persist import persisted
+    with persisted() as pdata:
+        last_access = pdata['last_access']
+        # do something interesting here
+        pdata['last_access'] = datetime.now()
+    ```
+
+    - if no persistent data file found, `pdata` will be an empty dictionary
+    - all datetimes discovered in the persistent data are converted to `pendulum` objects
+    - updated values are written back to the file on exiting the context manager
+    """
+    pdata = get_persisted()
+    if persisted is None:
+        pdata = {}
+    for name, value in pdata.items():
+        if isinstance(value, datetime):
+            pdata[name] = pendulum.instance(value)
+    try:
+        yield pdata
+    finally:
+        persist(pdata)
