@@ -26,9 +26,11 @@ def notify():
         login(driver)
         jobs = get_jobs(driver)
         print("Found {} total jobs".format(len(jobs)))
-        if len(jobs) > 0:
-            print("First job:")
-            print(str(jobs[0]))
+        jobs = [j for j in jobs if j.filter()]
+        print("Found {} valid jobs".format(len(jobs)))
+        for job in jobs:
+            print(str(job))
+            print()
 
 
 if __name__ == '__main__':

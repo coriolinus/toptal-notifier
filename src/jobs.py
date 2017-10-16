@@ -6,9 +6,11 @@ from selenium.common.exceptions import NoSuchElementException
 from pprint import pformat
 from urllib.parse import urljoin
 
+from . import relativetime
+from .config import config
 from .debug import debug
 from .persist import persisted
-from . import relativetime
+from .timezone import overlap_between
 
 JOBS = 'https://www.toptal.com/platform/talent/jobs'
 TZ_RE = re.compile(
@@ -87,10 +89,10 @@ class Job:
                 v = item.find_element_by_class_name("details-value").text.strip().lower()
                 self.details[k] = v
             elif k == 'required skills':
-                self.skills = [
+                self.skills = {
                     sk.text.strip().lower() for sk
                     in item.find_element_by_class_name("details-value").find_elements_by_tag_name('a')
-                ]
+                }
 
         # set the job post's estimated timestamp
         self.timestamp_estimate = relativetime.parse(self.details['job posted'], True)
@@ -114,6 +116,17 @@ class Job:
                 ).get_attribute('innerHTML').strip()
             except NoSuchElementException:
                 self.description = "Could not isolate job description; try clicking the URL to investigate"
+
+    def filter(self):
+        "True if this job passes all enabled filters"
+        if self.overlap_hours and config['tz']['filter']:
+            if overlap_between(config['tz']['home'], self.utc_offset) < self.overlap_hours:
+                return False
+        if config['tags']['filter']:
+            if not any(t in self.skills for t in config['tags']['include']) or any(t in self.skills for t in config['tags']['exclude']):
+                return False
+
+        return True
 
     def __repr__(self):
         return "<Job at {}>".format(self.url)
