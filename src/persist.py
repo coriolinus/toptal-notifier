@@ -54,7 +54,7 @@ def persisted():
     - updated values are written back to the file on exiting the context manager
     """
     pdata = get_persisted()
-    if persisted is None:
+    if pdata is None:
         pdata = {}
     for name, value in pdata.items():
         if isinstance(value, datetime):

@@ -7,6 +7,7 @@ from contextlib import closing
 from selenium import webdriver
 from src import config
 from src.login import login
+from src.jobs import get_jobs
 
 
 def get_driver():
@@ -23,6 +24,11 @@ def get_driver():
 def notify():
     with closing(get_driver()) as driver:
         login(driver)
+        jobs = get_jobs(driver)
+        print("Found {} total jobs".format(len(jobs)))
+        if len(jobs) > 0:
+            print("First job:")
+            print(str(jobs[0]))
 
 
 if __name__ == '__main__':
