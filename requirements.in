@@ -2,3 +2,4 @@ pip-tools           # get pip-compile
 toml                # parse configuration files
 pendulum            # richer datetime with timestamp parsing
 selenium            # browser driver
+sender              # simple way to send emails

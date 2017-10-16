@@ -132,15 +132,22 @@ class Job:
         return "<Job at {}>".format(self.url)
 
     def __str__(self):
-        return "{title}\n{url}\n\nPosted at: {ts} (est)\nUTC offset: {tz}\nReq. Overlap: {overlap}\n\nSkills: {skills}\n\n{desc}".format(
+        return self.to_string(truncate_desc=True)
+
+    def to_string(self, truncate_desc=False):
+        desc = (
+            self.description[:75] + '...'
+            if truncate_desc and len(self.description) >= 78
+            else self.description
+        )
+        return "{title}\n<{url}>\n\nPosted at: {ts} (est)\nUTC offset: {tz}\nReq. Overlap: {overlap}\n\nSkills: {skills}\n\n{desc}".format(
             title=self.title,
             url=self.url,
             ts=self.timestamp_estimate,
             tz=self.utc_offset,
             overlap=self.overlap_hours,
             skills=pformat(self.skills),
-            desc=self.description[:75] +
-            '...' if len(self.description) >= 78 else self.description,
+            desc=desc,
         )
 
 

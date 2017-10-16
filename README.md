@@ -21,15 +21,21 @@ Configuration is accomplished via the file `config.toml` in the project root. If
 - `username: str` your toptal username
 - `password: str` your toptal password
 
+`[notify.email]` configures the protocol with which the program sends mail to you.
+
+- `host: str` the smtp host used to send mail
+- `port: int` the smtp port for your email host. Default: `25`
+- `username: str` your smtp username
+- `password: str` your smtp password
+- `use_tls: bool` whether or not to use TLS. Default: `false`
+- `use_ssl: bool` whether or not to use SSL. Default: `false`
+- `from_address: str` the email address from which sent emails will originate
+- `from_pretty: str` If set, this is used for the 'pretty' version of the from field. Default: unset.
+- `subject: str` The subject line of the generated emails. Will have `.format(n=...)` called on it before sending, where `n` is the number of jobs which pass the filters on this run. Default: `"[Toptal Notifier] {n} jobs found for you"`
+
 `[notify.persist]` configures file persistence.
 
 - `path: str` where to put the persistence file. Default: `"persist.toml"`
-
-`[notify.email]` configures the protocol with which the program sends mail to you. This is assumed to be an SMTP server capable of TLS.
-
-- `host: str` the smtp host used to send mail
-- `port: int` the smtp port for your email host
-- `from_address: str` the email address from which sent emails will originate
 
 `[notify.tags]` is a sub-table defining which tags you're interested in. Jobs are tagged according to various skills and frameworks.
 

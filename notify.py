@@ -6,8 +6,10 @@ notify.py - get notifications when new toptal jobs show up
 from contextlib import closing
 from selenium import webdriver
 from src import config
-from src.login import login
+from src.email import send_jobs
 from src.jobs import get_jobs
+from src.login import login
+from sys import stdout, stderr
 
 
 def get_driver():
@@ -25,12 +27,21 @@ def notify():
     with closing(get_driver()) as driver:
         login(driver)
         jobs = get_jobs(driver)
-        print("Found {} total jobs".format(len(jobs)))
-        jobs = [j for j in jobs if j.filter()]
-        print("Found {} valid jobs".format(len(jobs)))
-        for job in jobs:
-            print(str(job))
-            print()
+
+    print("Found {} total jobs".format(len(jobs)))
+    jobs = [j for j in jobs if j.filter()]
+    print("Found {} valid jobs".format(len(jobs)))
+
+    if len(jobs) > 0:
+        print("Sending email... ", end='')
+        stdout.flush()
+        try:
+            send_jobs(jobs)
+        except Exception as e:
+            print('failed!')
+            print("{}: {}".format(e.__class__, str(e)), file=stderr)
+        else:
+            print("done!")
 
 
 if __name__ == '__main__':

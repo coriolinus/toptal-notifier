@@ -12,6 +12,7 @@ python-dateutil==2.6.1    # via pendulum
 pytz==2017.2              # via tzlocal
 pytzdata==2017.2.2        # via pendulum
 selenium==3.6.0
+sender==0.3
 six==1.11.0               # via pip-tools, python-dateutil
 toml==0.9.3.1
 tzlocal==1.4              # via pendulum

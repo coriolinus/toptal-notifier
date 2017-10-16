@@ -1,6 +1,12 @@
 [notify]
 debug_output=false
 
+[notify.email]
+port=25
+use_tls=false
+use_ssl=false
+subject="[Toptal Notifier] {n} jobs found for you"
+
 [notify.persist]
 path="persist.toml"
 
