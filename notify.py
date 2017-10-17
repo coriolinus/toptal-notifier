@@ -12,7 +12,7 @@ from src.login import login
 from sys import stdout, stderr
 
 
-def get_driver():
+def get_driver_chrome():
     options = webdriver.ChromeOptions()
     options.add_argument('--headless')
     options.add_argument("--disable-gpu")
@@ -23,8 +23,14 @@ def get_driver():
     return driver
 
 
+def get_driver_phantomjs():
+    driver = webdriver.PhantomJS()
+    driver.set_window_size(1200, 900)
+    return driver
+
+
 def notify():
-    with closing(get_driver()) as driver:
+    with closing(get_driver_phantomjs()) as driver:
         login(driver)
         jobs = get_jobs(driver)
 
