@@ -123,7 +123,9 @@ class Job:
             if overlap_between(config['tz']['home'], self.utc_offset) < self.overlap_hours:
                 return False
         if config['tags']['filter']:
-            if not any(t in self.skills for t in config['tags']['include']) or any(t in self.skills for t in config['tags']['exclude']):
+            if ((len(config['tags']['include']) > 0 and not
+                 any(t in self.skills for t in config['tags']['include'])) or
+                    any(t in self.skills for t in config['tags']['exclude'])):
                 return False
 
         return True
