@@ -7,3 +7,5 @@ config.toml
 *.sqlite3
 ghostdriver.log
 persist.toml
+notify.tar.bz2
+upload_self.sh
